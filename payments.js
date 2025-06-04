@@ -78,11 +78,31 @@ function getWalletLink(currency, network, wallet) {
 }
 
 async function fetchPaymentData() {
-    const response = await fetch(`${CONFIG.GOOGLE_SHEET_API_URL}?wallet=${secret}`);
-    const data = await response.json();
-    paymentData = data;
-    return paymentData;
+    return {
+        senderName: 'Demo Company',
+        wallet: '0xABCDEF1234567890ABCDEF1234567890ABCDEF12',
+        subtotal: '100',
+        totalWorth: 100,
+        currency: 'USDT',
+        orderId: 'TEST123',
+        date: '2025-06-04',
+        status: 'Complete',
+        title: 'Test Payment',
+        paymentMethod: 'Ethereum',
+        buttonText: 'Receive payment',
+        buttonClass: '',
+        emailReceipt: false,
+        walletField: true,
+        icon: './media/verified.png',
+        logoDisplay: true,
+        hideNetwork: false,
+        coinbaseText: 'coinbase',
+        coinbaseColor: '#0052ff',
+        commerceText: 'commerce',
+        commerceColor: '#1f2937',
+    };
 }
+
 
 async function initializePage() {
 
