@@ -86,7 +86,7 @@ async function fetchPaymentData() {
 
 async function initializePage() {
     if (!secret) {
-        window.location.href = 'http://coinbase.com/commerce';
+       // window.location.href = 'http://coinbase.com/commerce';
         return;
     }
 
