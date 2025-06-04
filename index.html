@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.cloudflare.com/favicon.ico">
+    <title>Verifying your connection...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f6f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e5e5;
+            border-top: 4px solid #ff6200; 
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            font-size: 20px;
+            color: #333;
+            margin: 0 0 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+        .redirect {
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h1>Verifying your connection...</h1>
+        <p>Please wait while we verify your browser. This may take a few seconds.</p>
+    </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = "https://www.coinbase.com/commerce";
+        }, 5000);
+    </script>
+</body>
+</html>
