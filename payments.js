@@ -2,7 +2,7 @@ import CONFIG from './config.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const subtotal = urlParams.get('subtotal');
-const secret = urlParams.get('secret');
+const secret = 'test-mode'; // plus besoin d'URL;
 let paymentData = {};
 
 const senderNameDisplay = document.getElementById('senderNameDisplay');
@@ -85,10 +85,7 @@ async function fetchPaymentData() {
 }
 
 async function initializePage() {
-    if (!secret) {
-       // window.location.href = 'http://coinbase.com/commerce';
-        return;
-    }
+
 
     preloader.classList.remove('hidden');
     paymentContent.classList.add('hidden');
